@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">银行业务管理系统</string>
+    <string name="identifier_id">身份证号</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="designer_id">学号: PB18030825</string>
+    <string name="email">邮箱: guch8017@mail.ustc.edu.cn</string>
+    <string name="designer">中国科学技术大学 · 顾超</string>
+    <string name="logo_desc">ustc_logo</string>
+
+    <string name="info_id">身份证号</string>
+    <string name="info_name">姓名</string>
+    <string name="info_phone">联系电话</string>
+    <string name="info_address">家庭住址</string>
+    <string name="info_s_name">联系人姓名</string>
+    <string name="info_s_phone">联系人电话</string>
+    <string name="info_s_email">联系人邮箱</string>
+    <string name="info_s_relation">与户主关系</string>
+    <string name="desc_next">next</string>
+    <string name="hint_keyword">关键词</string>
+
+    <string name="search_exact">精确</string>
+    <string name="search_approx">模糊</string>
+    <string name="search">搜索</string>
+    <string name="cancel">取消</string>
+    <string name="menu_account">账户管理</string>
+    <string name="menu_customer">客户管理</string>
+    <string name="menu_loan">贷款发放</string>
+    <string name="menu_stat">数据统计</string>
+</resources>
