@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新用户统计"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#000000"
+        android:layout_marginStart="5dp"/>
+
+    <TextView
+        android:id="@+id/start_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="起始年月"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_title"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:id="@+id/et_start"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/start_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="YYYYMM"
+        android:textColor="#000000"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:autofillHints=""
+        android:inputType="number" />
+
+
+    <TextView
+        android:id="@+id/end_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束年月"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_text"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:id="@+id/et_end"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/end_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="YYYYMM"
+        android:textColor="#000000"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/end_text"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="确定"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

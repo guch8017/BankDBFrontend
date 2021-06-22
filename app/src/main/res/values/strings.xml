@@ -16,15 +16,43 @@
     <string name="info_s_phone">联系人电话</string>
     <string name="info_s_email">联系人邮箱</string>
     <string name="info_s_relation">与户主关系</string>
+    <string name="info_acc_id">账户号</string>
+    <string name="info_branch">开户支行</string>
+    <string name="info_acc_type">账户类型</string>
+    <string name="info_customer_id">客户ID</string>
+    <string name="info_open_date">开户日期</string>
+    <string name="info_recent_date">最近访问日期</string>
+    <string name="info_holder_list">持卡人列表</string>
+    <string name="info_finance">货币类型</string>
+    <string name="info_overdraft">透支额度</string>
+    <string name="info_rate">利率</string>
+    <string name="info_loan_id">贷款ID</string>
+    <string name="info_loan_total">贷款总额</string>
+    <string name="info_create_date">创建日期</string>
+    <string name="info_loan_holder">持有人</string>
+    <string name="info_pay_history">支付历史</string>
     <string name="desc_next">next</string>
     <string name="hint_keyword">关键词</string>
+    <string name="hint_pay_num">支付金额</string>
+    
+    <string name="title_modify_account">修改账户信息</string>
+    <string name="title_create_account">创建账户</string>
+    <string name="title_modify_customer">修改客户信息</string>
+    <string name="title_create_customer">创建客户</string>
+    <string name="title_create_loan">发放贷款</string>
+    <string name="title_view_loan">查看贷款信息</string>
+
+    <string name="pay_loan">支付贷款</string>
+    <string name="pay_history">支付历史</string>
 
     <string name="search_exact">精确</string>
     <string name="search_approx">模糊</string>
     <string name="search">搜索</string>
     <string name="cancel">取消</string>
+    <string name="pay">支付</string>
     <string name="menu_account">账户管理</string>
     <string name="menu_customer">客户管理</string>
     <string name="menu_loan">贷款发放</string>
     <string name="menu_stat">数据统计</string>
+    <string name="ok">确认</string>
 </resources>

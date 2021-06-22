@@ -11,21 +11,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.github.guch8017.umaguide.ui.support_card_list.SupportCardListFragment;
-import com.github.guch8017.umaguide.ui.uma_list.UmaListFragment;
+import com.github.guch8017.db2021.ui.FragmentAccountList;
+import com.github.guch8017.db2021.ui.FragmentCustomerList;
+import com.github.guch8017.db2021.ui.FragmentLoanList;
+import com.github.guch8017.db2021.ui.FragmentStatistic;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
 
 public class NavigationBarFragment extends Fragment {
     private int currentIndex = -1;
-    static final int UMA_INDEX = 0;
-    static final int SP_INDEX = 1;
-    static final int RACE_INDEX = 2;
-    static final int SETTING_INDEX = 3;
+    static final int INDEX_CUSTOMER = 0;
+    static final int INDEX_ACCOUNT = 1;
+    static final int INDEX_LOAN = 2;
+    static final int INDEX_STAT = 3;
     static HashMap<Integer, Fragment> fragmentHashMap = new HashMap<Integer, Fragment>(){{
-       put(UMA_INDEX, new UmaListFragment());
-       put(SP_INDEX, new SupportCardListFragment());
+       put(INDEX_CUSTOMER, new FragmentCustomerList());
+       put(INDEX_ACCOUNT, new FragmentAccountList());
+       put(INDEX_LOAN, new FragmentLoanList());
+       put(INDEX_STAT, new FragmentStatistic());
     }};
 
     @Override
@@ -41,17 +45,17 @@ public class NavigationBarFragment extends Fragment {
         BottomNavigationView nav = view.findViewById(R.id.bottom_nav_view);
         nav.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.main_menu_uma_musume:
-                    switchFragments(UMA_INDEX);
+                case R.id.main_menu_customer:
+                    switchFragments(INDEX_CUSTOMER);
                     break;
-                case R.id.main_menu_support_card:
-                    switchFragments(SP_INDEX);
+                case R.id.main_menu_account:
+                    switchFragments(INDEX_ACCOUNT);
                     break;
-                case R.id.main_menu_race:
-                    switchFragments(RACE_INDEX);
+                case R.id.main_menu_loan:
+                    switchFragments(INDEX_LOAN);
                     break;
-                case R.id.main_menu_setting:
-                    switchFragments(SETTING_INDEX);
+                case R.id.main_menu_statistic:
+                    switchFragments(INDEX_STAT);
                     break;
                 default:
                     throw new RuntimeException("未知的ItemID");
@@ -59,7 +63,7 @@ public class NavigationBarFragment extends Fragment {
             return true;
         });
         if (currentIndex == -1) {
-            switchFragments(UMA_INDEX);
+            switchFragments(INDEX_CUSTOMER);
         }
         return view.getRootView();
     }

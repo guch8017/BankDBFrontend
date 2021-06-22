@@ -4,19 +4,24 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHostController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.github.guch8017.db2021.data.ModelLogin;
 import com.github.guch8017.db2021.data.ModelLoginResponse;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.github.guch8017.db2021.ui.FragmentAccountList;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +36,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginFragment extends Fragment {
     private EditText mPassword;
     private EditText mUsername;
     private Button mLoginBtn;
@@ -40,26 +45,37 @@ public class LoginActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreference = PreferenceManager.getDefaultSharedPreferences(this);
-        setContentView(R.layout.activity_login);
-        mPassword = findViewById(R.id.et_pwd);
-        mUsername = findViewById(R.id.et_uid);
-        mLoginBtn = findViewById(R.id.btn_login);
+        mPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
+    }
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_login, container, false);
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return keyCode == KeyEvent.KEYCODE_BACK;
+            }
+        });
+        mPassword = view.findViewById(R.id.et_pwd);
+        mUsername = view.findViewById(R.id.et_uid);
+        mLoginBtn = view.findViewById(R.id.btn_login);
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                View view = View.inflate(LoginActivity.this, R.layout.dialog_search_customer, null);
-                builder.setView(view);
-                builder.create().show();
+
                  */
                 mLoginBtn.setClickable(false);
                 doLogin();
             }
         });
+        return view;
     }
 
     private void doLogin() {
@@ -74,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Looper.prepare();
-                Toast.makeText(LoginActivity.this, "登录失败\n" + e, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginFragment.this.getContext(), "登录失败\n" + e, Toast.LENGTH_LONG).show();
                 mLoginBtn.setClickable(true);
                 Looper.loop();
             }
@@ -87,13 +103,15 @@ public class LoginActivity extends AppCompatActivity {
                 if(!resp.success){
                     editor.putBoolean("login", false);
                     editor.apply();
-                    Toast.makeText(LoginActivity.this, "登录失败\n" + resp.msg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginFragment.this.getContext(), "登录失败\n" + resp.msg, Toast.LENGTH_LONG).show();
                 }else {
                     editor.putBoolean("login", true);
-                    editor.putString("user_id", user_id);
-                    editor.putString("session", resp.data.session);
+                    editor.putString(Static.HEADER_USER, user_id);
+                    editor.putString(Static.HEADER_SESS, resp.data.session);
                     editor.apply();
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginFragment.this.getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                    getActivity().runOnUiThread(() -> NavHostFragment.findNavController(LoginFragment.this).navigateUp());
+
                 }
                 mLoginBtn.setClickable(true);
                 Looper.loop();
