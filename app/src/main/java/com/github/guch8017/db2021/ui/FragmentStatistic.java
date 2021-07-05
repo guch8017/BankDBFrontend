@@ -28,7 +28,7 @@ public class FragmentStatistic extends Fragment {
             NavHostFragment.findNavController(FragmentStatistic.this).navigate(NavigationBarFragmentDirections.actionNaviBarFragmentToNaviStatUser());
         });
         v.findViewById(R.id.branch_stat_layout).setOnClickListener(view2 -> {
-            NavHostFragment.findNavController(FragmentStatistic.this).navigate(NavigationBarFragmentDirections.actionNaviBarFragmentToNaviStatUser());
+            NavHostFragment.findNavController(FragmentStatistic.this).navigate(NavigationBarFragmentDirections.actionNaviBarFragmentToNaviStatBranch());
         });
         return v;
     }

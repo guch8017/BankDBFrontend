@@ -1,7 +1,7 @@
 package com.github.guch8017.db2021;
 
 public class Static {
-    public final static String HOST = "http://114.214.215.2:5000";
+    public final static String HOST = "http://172.20.10.9:5000";
     public final static String LOGIN = HOST + "/manage/login";
     public final static String LOGOUT = HOST + "/manage/logout";
 
@@ -25,7 +25,8 @@ public class Static {
     public final static String LOAN_PAY = HOST + "/loan/pay";
     public final static String LOAN_GET = HOST + "/loan/get_all";
 
-    public final static String STAT_GET = HOST + "/stat/query";
+    public final static String STAT_GET = HOST + "/stat/query_user";
+    public final static String STAT_GET_B = HOST + "/stat/query_branch";
 
     public final static String JSON_MEDIA = "application/json; charset=utf-8";
 

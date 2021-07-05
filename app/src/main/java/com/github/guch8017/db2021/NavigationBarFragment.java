@@ -62,10 +62,15 @@ public class NavigationBarFragment extends Fragment {
             }
             return true;
         });
+        return view.getRootView();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (currentIndex == -1) {
             switchFragments(INDEX_CUSTOMER);
         }
-        return view.getRootView();
     }
 
     private void switchFragments(int index) {

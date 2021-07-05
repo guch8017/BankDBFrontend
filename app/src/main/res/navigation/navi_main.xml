@@ -12,13 +12,13 @@
         <action
             android:id="@+id/navi_bar_to_login_fragment"
             app:destination="@id/navi_user_login"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"/>
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left"/>
         <action
             android:id="@+id/navi_bar_to_account_info_modifier"
             app:destination="@id/navi_account_info_modifier"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out">
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left">
             <argument
                 android:name="account"
                 app:argType="com.github.guch8017.db2021.data.Account" />
@@ -28,7 +28,9 @@
         </action>
         <action
             android:id="@+id/navi_bar_to_customer_info_modifier"
-            app:destination="@id/navi_customer_info_modifier">
+            app:destination="@id/navi_customer_info_modifier"
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left">
             <argument
                 android:name="customer"
                 app:argType="com.github.guch8017.db2021.data.Customer" />
@@ -38,7 +40,9 @@
         </action>
         <action
             android:id="@+id/action_navi_bar_fragment_to_navi_loan_info_modifier"
-            app:destination="@id/navi_loan_info_modifier" >
+            app:destination="@id/navi_loan_info_modifier"
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left">
             <argument
                 android:name="loan"
                 app:argType="com.github.guch8017.db2021.data.Loan"/>
@@ -48,7 +52,12 @@
         </action>
         <action
             android:id="@+id/action_navi_bar_fragment_to_navi_stat_user"
-            app:destination="@id/navi_stat_user" />
+            app:destination="@id/navi_stat_user"
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left"/>
+        <action
+            android:id="@+id/action_navi_bar_fragment_to_navi_stat_branch"
+            app:destination="@id/navi_stat_branch" />
     </fragment>
 
     <fragment
@@ -196,5 +205,9 @@
         android:id="@+id/navi_stat_user"
         android:name="com.github.guch8017.db2021.ui.FragmentStatDetail"
         tools:layout="@layout/fragment_stat_detail"/>
+
+    <fragment
+        android:id="@+id/navi_stat_branch"
+        android:name="com.github.guch8017.db2021.ui.FragmentStatBranchDetail"/>
 
 </navigation>

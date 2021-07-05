@@ -27,6 +27,9 @@ import com.github.guch8017.db2021.data.ModelCustomerResponse;
 import com.github.guch8017.db2021.view_model.GlobalShareVM;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FragmentCustomerInfoModifier extends Fragment implements InfoModifyAdapter.IGetItem<Customer>, InfoModifyAdapter.ItemViewHolder.IOnItemClickListener {
     private InfoModifyAdapter<Customer> mAdapter;
     private Customer mData;
@@ -145,6 +148,13 @@ public class FragmentCustomerInfoModifier extends Fragment implements InfoModify
         fabCreate.setOnClickListener(v1 -> {
             if(mData.identifier_id == null || mData.s_rel == null || mData.s_email == null || mData.s_phone == null || mData.s_name == null || mData.address == null || mData.phone == null || mData.name == null){
                 Toast.makeText(getContext(), "必要信息未填写完全", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+            Pattern regex = Pattern.compile(check);
+            Matcher matcher = regex.matcher(mData.s_email);
+            if(!matcher.matches()){
+                Toast.makeText(getContext(), "邮箱格式异常", Toast.LENGTH_SHORT).show();
                 return;
             }
             String url = isCreateCustomer ? Static.CUSTOMER_CREATE : Static.CUSTOMER_MODIFY;

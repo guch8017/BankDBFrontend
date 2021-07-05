@@ -52,7 +52,9 @@ public class NetworkUtil<TResponse extends ModelResponseBase> {
         mClient.newCall(req).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Looper.prepare();
                 callback.onFailure(e);
+                Looper.loop();
             }
 
             @Override
@@ -115,8 +117,6 @@ public class NetworkUtil<TResponse extends ModelResponseBase> {
                 } finally {
                     Looper.loop();
                 }
-
-
             }
         });
     }

@@ -101,6 +101,27 @@ public class FragmentLoanInfoModifier extends Fragment implements InfoModifyAdap
         }
     }
 
+    static class HolderAdapter extends ArrayAdapter<String> {
+        LayoutInflater mInflater;
+
+        public HolderAdapter(@NonNull Context context, List<String> data) {
+            super(context, 0, data);
+            mInflater = LayoutInflater.from(context);
+
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            if(convertView == null) {
+                convertView = mInflater.inflate(R.layout.item_customer_ids, parent, false);
+            }
+            String item = getItem(position);
+            ((TextView) convertView.findViewById(R.id.user_id)).setText(item);
+            return convertView;
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,7 +204,6 @@ public class FragmentLoanInfoModifier extends Fragment implements InfoModifyAdap
         return v;
     }
 
-
     @Override
     public InfoItem getItem(int position, Loan model) {
         switch (position) {
@@ -196,9 +216,11 @@ public class FragmentLoanInfoModifier extends Fragment implements InfoModifyAdap
             case 3:
                 return new InfoItem(R.string.info_create_date, model.create_date, false);
             case 4:
-                return new InfoItem(R.string.info_loan_holder, model.customers.size() + "人", isNewLoan);
+                return new InfoItem(R.string.info_loan_holder, model.customers.size() + "人", true);
             case 5:
-                return new InfoItem(R.string.info_pay_history, model.paid_history.size() + " 条记录");
+                return new InfoItem(R.string.info_pay_history, model.paid_history.size() + " 条记录", isNewLoan);
+            case 6:
+                return new InfoItem(R.string.info_pay_status, (isNewLoan)?"":(model.getStatus()), false);
             default:
                 throw new IndexOutOfBoundsException();
 
@@ -207,7 +229,7 @@ public class FragmentLoanInfoModifier extends Fragment implements InfoModifyAdap
 
     @Override
     public int getItemCount(Loan model) {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -222,7 +244,19 @@ public class FragmentLoanInfoModifier extends Fragment implements InfoModifyAdap
                 ctl.navigate(FragmentLoanInfoModifierDirections.actionNaviLoanInfoModifierToNaviBranchSelector(1));
                 break;
             case 4:
-                ctl.navigate(FragmentLoanInfoModifierDirections.actionNaviLoanInfoModifierToNaviCustomerSelector(1));
+                if(isNewLoan){
+                    ctl.navigate(FragmentLoanInfoModifierDirections.actionNaviLoanInfoModifierToNaviCustomerSelector(1));
+                }
+                else {
+                    View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_pay_history, null);
+                    ListView lv = v.findViewById(R.id.history_list);
+                    HolderAdapter holderAdapter = new HolderAdapter(getContext(), mData.customers);
+                    lv.setAdapter(holderAdapter);
+                    ((TextView)v.findViewById(R.id.search_text)).setText("贷款持有者");
+                    AlertDialog dialog = new AlertDialog.Builder(getContext()).setView(v).create();
+                    v.findViewById(R.id.btn_ok).setOnClickListener(v1 -> dialog.dismiss());
+                    dialog.show();
+                }
                 break;
             case 1:
                 fromTextEdit = true;
