@@ -82,13 +82,13 @@
                 android:id="@+id/rb_saving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_acc_type" />
+                android:text="储蓄账户" />
 
             <RadioButton
                 android:id="@+id/rb_checking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_customer_id" />
+                android:text="支票账户" />
 
         </RadioGroup>
 
